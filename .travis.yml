@@ -21,18 +21,19 @@ after_success:
   - docker push com6511/docker-frontend
   - docker push com6511/docker-backend
   - docker push com6511/docker-nginx
-# deploy:
-#   provider: elasticbeanstalk
-#   region: "ap-northeast-2"
-#   app: "docker-fullstack-app"
-#   env: ""
-#   bucket_name:
-#   bucket_path:
-#   on:
-#     repo: dong-woogie/docker-full-stack
-#     branches:
-#       only:
-#         - master
 
-#   access_key_id: $AWS_ACCESS_KEY
-#   secret_access_key: $AWS_SECRET_ACCESS_KEY
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-northeast-2"
+  app: "docker-fullstack-app"
+  env: "Dockerfullstackapp-env"
+  bucket_name: elasticbeanstalk-ap-northeast-2-785720007930
+  bucket_path: "docker-fullstack-app"
+  on:
+    repo: dong-woogie/docker-full-stack
+    branches:
+      only:
+        - master
+
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
