@@ -2,7 +2,7 @@ FROM node:12 as builder
 
 WORKDIR /usr/src/docker-front-app
 COPY ./package.json .
-COPY ./pakcage-lock.json .
+COPY ./package-lock.json .
 RUN npm install
 COPY . .
 RUN npm run build
