@@ -12,15 +12,15 @@ scripts:
   - docker run -e CI=true dong-woogie/react-test-app npm run test
 
 after_success:
-  - docker build -t dong-woogie/docker-frontend ./frontend
-  - docker build -t dong-woogie/docker-backend ./backend
-  - docker build -t dong-woogie/docker-nginx ./nginx
+  - docker build -t com6511/docker-frontend ./frontend
+  - docker build -t com6511/docker-backend ./backend
+  - docker build -t com6511/docker-nginx ./nginx
 
   - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
 
-  - docker push dong-woogie/docker-frontend
-  - docker push dong-woogie/docker-backend
-  - docker push dong-woogie/docker-nginx
+  - docker push com6511/docker-frontend
+  - docker push com6511/docker-backend
+  - docker push com6511/docker-nginx
 # deploy:
 #   provider: elasticbeanstalk
 #   region: "ap-northeast-2"
