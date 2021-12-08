@@ -9,6 +9,12 @@ services:
     volumes:
       - /usr/src/docker-backend-app/node_modules
       - ./backend:/usr/src/docker-backend-app
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASSWORD=woogie777
+      - DB_NAME=myapp
+      - DB_PORT=3306
 
   mysql:
     build: ./mysql
