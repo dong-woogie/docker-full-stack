@@ -7,6 +7,17 @@ const PORT = 5000;
 
 app.use(bodyParser.json());
 
+db.pool.query(
+  `CREATE TABLE lists (
+  id INTEGER AUTO_INCREMENT,
+  value TEXT,
+  PRIMARY KEY (id)
+)`,
+  (err, results, fileds) => {
+    console.log("results", results);
+  }
+);
+
 app.get("/api", (req, res) => {
   res.send("welcome api server");
 });
