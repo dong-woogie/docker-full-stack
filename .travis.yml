@@ -1,0 +1,38 @@
+language: generic
+
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t dong-woogie/react-test-app -f ./frontend/Dockerfile.dev ./frontend
+
+scripts:
+  - docker run -e CI=true dong-woogie/react-test-app npm run test
+
+after_success:
+  - docker build -t dong-woogie/docker-frontend ./frontend
+  - docker build -t dong-woogie/docker-backend ./backend
+  - docker build -t dong-woogie/docker-nginx ./nginx
+
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+
+  - docker push dong-woogie/docker-frontend
+  - docker push dong-woogie/docker-backend
+  - docker push dong-woogie/docker-nginx
+# deploy:
+#   provider: elasticbeanstalk
+#   region: "ap-northeast-2"
+#   app: "docker-fullstack-app"
+#   env: ""
+#   bucket_name:
+#   bucket_path:
+#   on:
+#     repo: dong-woogie/docker-full-stack
+#     branches:
+#       only:
+#         - master
+
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key: $AWS_SECRET_ACCESS_KEY
